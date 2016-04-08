@@ -14,14 +14,14 @@ fn factorial(n:u32) -> u32 {
      }
 }
 
-    fn digit_factorial_sum(mut arg:u32) -> u32 {
-        let mut sum = 0;
-        while arg > 0 {
-            sum += factorial(arg % 10);
-            arg /= 10;
-        }
-        sum
+fn digit_factorial_sum(mut arg:u32) -> u32 {
+    let mut sum = 0;
+    while arg > 0 {
+        sum += factorial(arg % 10);
+        arg /= 10;
     }
+    sum
+}
 
 pub fn solve(max:u32, terms:usize) -> usize {
     (1..max)
