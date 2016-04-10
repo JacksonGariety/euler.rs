@@ -1,11 +1,19 @@
+extern crate fnv;
+
+use std::collections::HashSet;
+use std::hash::BuildHasherDefault;
+use self::fnv::FnvHasher;
+
+type Fnv = BuildHasherDefault<FnvHasher>;
+
 struct FactorialDigitChain {
     n: u32, // this is the current link in the chain
-    v: Vec<u32>, // the vector stores the lifetime of the chain
+    v: HashSet<u32, Fnv>, // the vector stores the lifetime of the chain
 }
 
 impl FactorialDigitChain {
     fn new(start: u32, terms: usize) -> FactorialDigitChain {
-        FactorialDigitChain { n: start, v: Vec::with_capacity(terms) }
+        FactorialDigitChain { n: start, v: HashSet::with_capacity_and_hasher(terms, Fnv::default()) }
     }
 }
 
@@ -22,7 +30,7 @@ impl Iterator for FactorialDigitChain {
     type Item = u32;
     
     fn next(&mut self) -> Option<u32> {
-        self.v.push(self.n); // update lifetime
+        self.v.insert(self.n); // update lifetime
         self.n = sum_digit_factorials(self.n); // calculate n
         if self.v.contains(&self.n) { None } // check the lifetime vector for a duplicate
         else { Some(self.n) } // return n

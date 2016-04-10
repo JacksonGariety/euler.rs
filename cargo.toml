@@ -3,3 +3,5 @@ name = "euler_rs"
 version = "0.1.0"
 [dependencies]
 time = "*"
+fnv = "*"
+twox-hash = "1.0.0"
