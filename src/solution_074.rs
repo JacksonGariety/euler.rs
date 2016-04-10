@@ -1,19 +1,21 @@
-extern crate fnv;
+// extern crate fnv;
+extern crate twox_hash;
 
 use std::collections::HashSet;
 use std::hash::BuildHasherDefault;
-use self::fnv::FnvHasher;
+// use self::fnv::FnvHasher;
+use self::twox_hash::XxHash;
 
-type Fnv = BuildHasherDefault<FnvHasher>;
+type Xx = BuildHasherDefault<XxHash>;
 
 struct FactorialDigitChain {
     n: u32, // this is the current link in the chain
-    v: HashSet<u32, Fnv>, // the vector stores the lifetime of the chain
+    v: HashSet<u32, Xx>, // the vector stores the lifetime of the chain
 }
 
 impl FactorialDigitChain {
     fn new(start: u32, terms: usize) -> FactorialDigitChain {
-        FactorialDigitChain { n: start, v: HashSet::with_capacity_and_hasher(terms, Fnv::default()) }
+        FactorialDigitChain { n: start, v: HashSet::with_capacity_and_hasher(terms, Xx::default()) }
     }
 }
 
