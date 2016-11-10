@@ -33,8 +33,12 @@ impl Iterator for SquareDigitChain {
     }
 }
 
-pub fn solve(max:u32, end:u32) -> usize {
+fn square_digit_chain(max:u32, end:u32) -> usize {
     (1..max) // make a range of each number below that of the problem statement
         .filter(|&i| SquareDigitChain::new(i).last() == Some(end) )
         .count() // count the number of items remaining in the range
+}
+
+fn main() {
+    println!("{}", square_digit_chain(10000000, 89))
 }

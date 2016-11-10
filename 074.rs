@@ -29,8 +29,12 @@ impl Iterator for FactorialDigitChain {
     }
 }
 
-pub fn solve(max:u32, terms:usize) -> usize {
+fn fact_digit_chain(max:u32, terms:usize) -> usize {
     (0..max) // make a range of each number below that of the problem statement
         .filter(|&i| FactorialDigitChain::new(i, terms).count() + 1 == terms) // filter that range by the length of i's factorial digit chain
         .count() // count the number of items remaining in the range
+}
+
+fn main() {
+    println!("{}", fact_digit_chain(1000000, 60))
 }
